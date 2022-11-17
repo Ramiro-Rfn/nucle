@@ -6,10 +6,10 @@ export default function Home(){
   return (
       <>
         <Head>
-           <title>NFT Access | Sign In</title>
+           <title>Nucle | Home</title>
         </Head>
-        <Flex align='center' justify='center'>
-          <h1>Hello chakra</h1>
+        <Flex h='100vh' w='100vw' bg='gray.900'>
+          
         </Flex>
       </>
   )  
