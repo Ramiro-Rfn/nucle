@@ -1,6 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import Head from "next/head";
 import { Header } from "../components/Header";
+import { Sidebar } from "../components/Sidebar";
 
 export default function DashBoard() {
     return (
@@ -10,7 +11,7 @@ export default function DashBoard() {
                 <Header/>
 
                 <Flex w=''>
-
+                    <Sidebar/>
                 </Flex>
             </Flex>
         </>
