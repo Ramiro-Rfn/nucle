@@ -16,7 +16,7 @@ export default function Home(){
           justify='center'
           flexDir='column'
         >
-          <Text color='green.500' fontSize='3rem' fontWeight='bold' mb='10'>.Nucle</Text>
+          <Text color='green.500' fontSize='2.5rem' fontWeight='bold' mb='10'>.Nucle</Text>
 
           <Flex 
             as='form' 

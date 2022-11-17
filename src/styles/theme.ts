@@ -25,7 +25,8 @@ export const theme = extendTheme({
         global: {
             '*': {
                 listStyleType: 'none',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                color: 'gray.50'
             },
 
             body: {
