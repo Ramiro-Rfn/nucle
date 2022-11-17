@@ -20,11 +20,10 @@ export function Header() {
                 flex='1'
                 py='2'
                 px='8'
-                ml="6"
+                ml="8"
                 maxW={400}
                 alignSelf='center'
                 color='gray.200'
-                position='relative'
                 bg='gray.800'
                 align='center'
                 borderRadius='full'
