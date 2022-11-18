@@ -11,7 +11,6 @@ export function Input({ name, label }: InputProps) {
 
             <ChakraInput 
                 name={name} 
-                type='password'
                 id={name}
                 _placeholder={{
                 color: 'gray.200'
