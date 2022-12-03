@@ -1,4 +1,5 @@
 import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from "@chakra-ui/react";
+import Link from "next/link";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
@@ -21,15 +22,18 @@ export default function UsersList() {
                     <Flex mb='8' justify='space-between' align='center'>
                         <Heading size='lg' fontWeight='normal'>Usuários</Heading>
 
-                        <Button 
-                            as='a'
-                            size='sm'
-                            fontSize='sm'
-                            colorScheme='green'
-                            leftIcon={<Icon as={RiAddLine}/>}
-                        >
-                            Criar novo
-                        </Button>
+                        <Link href='/users/create'>
+                            <Button 
+                                as='a'
+                                size='sm'
+                                fontSize='sm'
+                                colorScheme='green'
+                                cursor='pointer'
+                                leftIcon={<Icon as={RiAddLine}/>}
+                            >
+                                Criar novo
+                            </Button>
+                        </Link>
                     </Flex>
 
                     <Table colorScheme='whiteAlpha'>
@@ -68,6 +72,7 @@ export default function UsersList() {
                                                 size='sm'
                                                 fontSize='sm'
                                                 colorScheme='purple'
+                                                cursor='pointer'
                                                 leftIcon={<Icon as={RiPencilLine}/>}
                                             >
                                                 { isWideVersion && 'Editar'}
