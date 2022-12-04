@@ -68,7 +68,7 @@ const series = [
 export default function DashBoard() {
     return (
         <>
-            <Head>Nucle | Dashboard</Head>
+            <Head>.Nucle | Dashboard</Head>
             <Flex flexDir='column' h='100vh'>
                 <Header/>
 

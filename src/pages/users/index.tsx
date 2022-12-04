@@ -1,4 +1,5 @@
 import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from "@chakra-ui/react";
+import Head from "next/head";
 import Link from "next/link";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
@@ -12,6 +13,8 @@ export default function UsersList() {
     });
 
     return (
+        <>
+        <Head>.Nucle | Lista de Usuários</Head>
         <Box>
             <Header />
 
@@ -88,5 +91,6 @@ export default function UsersList() {
 
             </Flex>
         </Box>
+        </>
     )
 }
