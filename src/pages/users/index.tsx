@@ -26,12 +26,18 @@ export default function UsersList() {
                 id: user.id,
                 name: user.name,
                 email: user.email,
-                createdAt: new Date(user.createdAt).toDateString()
+                createdAt: new Date(user.createdAt).toLocaleDateString('pt-BR', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric'
+                })
             }
         })
 
 
         return users;
+    }, {
+        staleTime: 1000 * 5 //5s
     });
 
     console.log(data)
