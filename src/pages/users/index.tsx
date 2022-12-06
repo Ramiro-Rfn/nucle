@@ -1,13 +1,14 @@
-import { Box, Button, Checkbox, Flex, Heading, Icon, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Button, Checkbox, Flex, Heading, Icon, Link as ChakraLink, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from "@chakra-ui/react";
 import Head from "next/head";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 import { useUsers } from "../../services/hooks/useUsers";
+import { queryClient } from "../../services/queryClient";
 
 
 
@@ -23,9 +24,18 @@ export default function UsersList() {
         lg: true
     });
     
-    useEffect(()=>{
-        
-    }, [])
+    async function handlePrefetchUser(userId: number) {
+        await queryClient.prefetchQuery(['user', userId],async () => {
+            const response = await fetch(`http://localhost:3000/api/users/${userId}`);
+
+            const data = response.json();
+
+            return data;
+        }, {
+            staleTime: 1000 * 60 * 10, // 10min
+        })
+    }
+
 
     return (
         <>
@@ -90,7 +100,11 @@ export default function UsersList() {
 
                                                 <Td>
                                                     <Box>
-                                                        <Text fontWeight='bold'>{user.name}</Text>
+                                                        {
+                                                            <ChakraLink color='purple.400' onMouseEnter={()=>handlePrefetchUser(user.id)}>
+                                                                <Text color='inherit' fontWeight='bold'>{user.name}</Text>
+                                                            </ChakraLink>
+                                                        }
                                                         <Text fontSize='sm' color='gray.300'>{user.email}</Text>
                                                     </Box>
                                                 </Td>
