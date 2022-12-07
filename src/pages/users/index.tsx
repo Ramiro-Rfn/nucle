@@ -7,6 +7,7 @@ import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
+import { api } from "../../services/api";
 import { useUsers } from "../../services/hooks/useUsers";
 import { queryClient } from "../../services/queryClient";
 
@@ -26,11 +27,9 @@ export default function UsersList() {
     
     async function handlePrefetchUser(userId: number) {
         await queryClient.prefetchQuery(['user', userId],async () => {
-            const response = await fetch(`http://localhost:3000/api/users/${userId}`);
+            const response = await api.get(`users/${userId}`);
 
-            const data = response.json();
-
-            return data;
+            return response.data;
         }, {
             staleTime: 1000 * 60 * 10, // 10min
         })
@@ -109,7 +108,7 @@ export default function UsersList() {
                                                     </Box>
                                                 </Td>
 
-                                                {isWideVersion && <Td>{user.createdAt}</Td>}
+                                                {isWideVersion && <Td>{user.created_at}</Td>}
 
                                                 <Td>
                                                     {isWideVersion && <Button 

@@ -2,12 +2,17 @@ import { Box, Button, Divider, Flex, Heading, SimpleGrid, Stack } from "@chakra-
 import { yupResolver } from '@hookform/resolvers/yup';
 import Head from "next/head";
 import Link from "next/link";
+
+import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useMutation } from "react-query";
 import * as Yup from 'yup';
 
 import { Input } from "../../components/Form/Input";
 import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
+import { api } from "../../services/api";
+import { queryClient } from "../../services/queryClient";
 
 
 type CreateUserFormData = {
@@ -21,22 +26,40 @@ const CreateUserFormShema = new Yup.ObjectSchema({
     name: Yup.string().required('Nome obrigatório!'),
     email: Yup.string().required('Email obrigatório!').email('Email inválido!'),
     password: Yup.string().required('Senha obrigatória!').min(6, 'No mínimo 6 caracteres!'),
-    password_confirmation: Yup.string()
-    .required('Confirmação de senha obrigatório!')
-    .oneOf([Yup.ref('password'), null], 'As Senhas devem ser iguais!'),
+    //password_confirmation: Yup.string()
+    //.required('Confirmação de senha obrigatório!')
+    //.oneOf([Yup.ref('password'), null], 'As Senhas devem ser iguais!'),
 })
-  
 
 export default function CreateUser() {
+    const router = useRouter();
+
+    const createUser = useMutation(async (user: CreateUserFormData)=> {
+        const response = await api.post('users', {
+            user: {
+                ...user,
+                created_at: new Date(),
+            }
+        })
+
+        return response;
+    }, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('users')
+        },
+    })
+
     const { register, handleSubmit, formState: { errors, isSubmitting} } = useForm<CreateUserFormData>({
         resolver: yupResolver(CreateUserFormShema)
     });
 
     const  handleCreateUser: SubmitHandler<CreateUserFormData> = async (values) => {
-        await new Promise((resolve)=> setTimeout(resolve, 2000));
-    
-        console.log(values);
-      }
+        console.log(values)
+        await createUser.mutateAsync(values);
+
+        router.push('/users');
+
+    }
 
     return (
         <>

@@ -35,8 +35,15 @@ export function Pagination({
     return (
         <Stack mt='8' direction={['column', 'row']} justify='space-between' align='center'>
             <Box>
-                <strong>0</strong> - <strong>10</strong> de <strong>100</strong>
+                <strong>
+                    {(currentPage * registersPerPage + 1) - registersPerPage}
+                </strong> - <strong>
+                    {registersPerPage * currentPage}
+                </strong> de <strong>
+                    {totalCountOfRegisters}
+                </strong>
             </Box>
+            
             <Stack direction='row'>
 
                 {currentPage > ( 1 + siblingsCount) && (
