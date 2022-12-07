@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { ActiveModelSerializer, createServer, Factory, Model, Response } from 'miragejs';
 
 type User = {
@@ -7,6 +8,8 @@ type User = {
 }
 
 export function makeServer() {
+    let fakerName = faker.name.fullName;
+
     const server = createServer({
         serializers: {
             application: ActiveModelSerializer,
@@ -16,18 +19,23 @@ export function makeServer() {
             user: Model.extend<Partial<User>>({})
         },
 
+
         factories: {
+
             user: Factory.extend({
+
                 name(i: number) {
-                    return `User ${i + 1}`;
+                    return fakerName();
                 },
 
                 email(i: number) {
-                    return `user${i + 1 }@gmail.com`;
+                    return `${String(fakerName())
+                        .toLocaleLowerCase().replace(/\s/g, '')}@gmail.com
+                    `;
                 },
 
                 createdAt() {
-                    return new Date();
+                    return faker.date.recent(10);
                 }
             })
         },
