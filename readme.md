@@ -38,3 +38,5 @@ Rode o progecto:
 ```bash
 yarn dev
 ```
+
+link perview: https://nucle.vercel.app/
