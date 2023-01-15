@@ -39,4 +39,4 @@ Rode o progecto:
 yarn dev
 ```
 
-link perview: https://nucle.vercel.app/
+Preview Link: https://nucle.vercel.app/
