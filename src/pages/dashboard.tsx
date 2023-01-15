@@ -7,6 +7,8 @@ const Chart = dynamic(()=> import('react-apexcharts'), { ssr: false });
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
 
+const dateTime: 'category' | 'datetime' | 'numeric' = 'datetime';
+
 const options = {
     chart: {
         toolbar: {
@@ -29,12 +31,12 @@ const options = {
     },
 
     xaxis: {
-        type: 'datetime',
+        type: dateTime,
         axisBorder: {
-            color: theme.colors.gray[600]
+            color: String(theme.colors.gray[600])
         },
         axisTicks: {
-            color: theme.colors.gray[600]
+            color: String(theme.colors.gray[600])
         },
         categories: [
             '2022-11-18T00:00:00.000Z',

@@ -48,7 +48,7 @@ export function makeServer() {
             this.namespace = 'api';
             this.timing = 750;
 
-            this.get('/users', function (schema, request) {
+            this.get('/users', function (this: any, schema, request) {
                 const { page=1, per_page = 10 } = request.queryParams;
 
                 const total: number = schema.all('user').length;
